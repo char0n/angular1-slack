@@ -13,49 +13,12 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="app" ng-cloak layout="column">
+  <body ng-app="app" ng-cloak layout="row">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="toggleLeftMenu()">
-          <md-icon md-svg-icon="images/menu.svg"></md-icon>
-        </md-button>
-        <h2>
-          <span>Team Zeus</span>
-        </h2>
-        <span flex></span>
-        <md-menu>
-          <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-            <md-icon>view_module</md-icon>
-          </md-button>
-          <md-menu-content width="4">
-            <md-menu-item>
-              <md-button ng-disabled="true" ng-click="gotoChat()">
-                <md-icon>chat</md-icon>
-                Chat
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-click="gotoCalendar()">
-                <md-icon>event</md-icon>
-                Calendar
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-click="gotoPeople()">
-                <md-icon>contacts</md-icon>
-                People
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
-    </md-toolbar>
-
-    <div flex layout="row" ng-view></div>
+    <main flex layout="column" ng-view></main>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
