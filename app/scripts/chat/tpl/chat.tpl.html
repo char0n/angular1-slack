@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="toggleLeftMenu()">
+    <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="chat.toggleLeftMenu()">
       <md-icon md-svg-icon="images/menu.svg"></md-icon>
     </md-button>
     <h2>
@@ -53,9 +53,15 @@
     </md-content>
   </md-sidenav>
 
+
   <section flex layout="column">
     <md-content flex="95" md-scroll-y>
       <md-list>
+        <md-button class="md-icon-button tz-conversion-menu-opener"
+                   ng-hide="chat.isOpenConversionMenu()"
+                   ng-click="chat.openConversationMenu()">
+          <md-icon>menu</md-icon>
+        </md-button>
         <md-subheader class="md-no-sticky">2nd of January 2015</md-subheader>
         <md-list-item class="md-3-line md-long-text">
           <md-icon class="md-36">account_circle</md-icon>
@@ -190,3 +196,13 @@
   </section>
 
 </section>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Conversion options</h1>
+  </md-toolbar>
+  <md-content layout-padding>
+    options
+  </md-content>
+</md-sidenav>
+
