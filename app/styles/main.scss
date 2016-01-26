@@ -7,6 +7,10 @@
 
 .md-float-right { float: right }
 
+md-list-item.active .md-list-item-inner {
+  font-weight: bold !important;
+}
+
 .tz-conversion-menu-opener {
   position: fixed;
   right: 15px;
