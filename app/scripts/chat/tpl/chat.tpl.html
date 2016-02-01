@@ -1,4 +1,4 @@
-<md-toolbar>
+<md-toolbar flex="none" style="min-height: 64px; max-height: 64px;">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="chat.toggleLeftMenu()">
       <md-icon md-svg-icon="images/menu.svg"></md-icon>
@@ -35,8 +35,8 @@
   </div>
 </md-toolbar>
 
-<section layout="row" flex layout-fill>
-  <md-sidenav flex class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="chat-left-menu">
+<section layout="row" flex style="max-height: calc(100% - 64px)">
+  <md-sidenav flex="none" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="chat-left-menu">
     <md-content>
       <md-list-item class="active" ng-click="test()">
         <p>#channel1</p>
@@ -53,9 +53,8 @@
     </md-content>
   </md-sidenav>
 
-
-  <section flex layout="column">
-    <md-content flex="95" md-scroll-y>
+  <div layout="column" flex>
+    <md-content md-scroll-y>
       <md-list>
         <md-button class="md-icon-button tz-conversion-menu-opener"
                    ng-hide="chat.isOpenConversionMenu()"
@@ -188,21 +187,14 @@
         </md-list-item>
       </md-list>
     </md-content>
-    <div style="height: 100px">
-      <md-input-container  md-no-float class="md-block">
-        <textarea placeholder="Write new message..."></textarea>
-      </md-input-container>
-    </div>
-  </section>
-
+  </div>
 </section>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu">
   <md-toolbar class="md-theme-light">
-    <h1 class="md-toolbar-tools">Conversion options</h1>
+    <h1 class="md-toolbar-tools">Conversation options</h1>
   </md-toolbar>
   <md-content layout-padding>
     options
   </md-content>
 </md-sidenav>
-
