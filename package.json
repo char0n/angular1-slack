@@ -37,6 +37,11 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "browserify": "browserify"
+  },
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "reselect": "^2.0.2"
   }
 }
