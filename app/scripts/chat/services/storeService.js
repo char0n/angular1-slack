@@ -6,7 +6,6 @@
     .factory('storeService', storeService);
 
   function storeService(reduxService) {
-    console.dir(window);
     var store;
     var initialState = {
       channels: [

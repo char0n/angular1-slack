@@ -50,14 +50,11 @@
           return message.channelId === activeChannelId;
         })
         .map(function(message) {
-          return angular.copy(message);
-        })
-        .map(function(message) {
-          message.user = _.find(users, 'id', message.id);
+          message.user = angular.extend({user: _.find(users, 'id', message.id)}, message);
         });
     }
 
-    function select(state) {
+      function select(state) {
       return {
         channels: angular.copy(selectChannels(state)),
         messages: selectMessages(state)
