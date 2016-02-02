@@ -5,7 +5,8 @@
     .module('app.chat')
     .controller('ChatController', ChatController);
 
-  function ChatController($scope, $mdSidenav, $timeout, storeService, _) {
+  function ChatController($scope, $mdSidenav, $timeout, storeService,
+                          selectorsService) {
     var vm = this;
     var storeUnsubscribe ;
     vm.toggleLeftMenu = toggleLeftMenu;
@@ -33,31 +34,11 @@
       $mdSidenav('conversion-menu').open();
     }
 
-    function selectChannels(state) {
-      return state.channels;
-    }
-
-    function selectUsers(state) {
-      return state.users;
-    }
-
-    function selectMessages(state) {
-      var activeChannelId = _.find(state.channels, {'isActive': true});
-      var users = selectUsers(state);
-
-      return state.messages
-        .filter(function(message) {
-          return message.channelId === activeChannelId;
-        })
-        .map(function(message) {
-          message.user = angular.extend({user: _.find(users, 'id', message.id)}, message);
-        });
-    }
-
-      function select(state) {
+    function select(state) {
       return {
-        channels: angular.copy(selectChannels(state)),
-        messages: selectMessages(state)
+        activeChannelFilter: selectorsService.activeChannelFilterSelector(state),
+        channels: selectorsService.channelsSelector(state),
+        messages:  selectorsService.activeMessagesSelector(state)
       };
     }
 

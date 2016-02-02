@@ -39,7 +39,7 @@
   <md-sidenav flex="none" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')"
               md-component-id="chat-left-menu">
     <md-content>
-      <md-list-item ng-repeat="channel in chat.channels" ng-class="::{'active': channel.isActive}"
+      <md-list-item ng-repeat="channel in chat.channels" ng-class="::{'active': channel.id === chat.activeChannelFilter}"
                     ng-click="chat.gotoChannel()">
         <p>#{{ ::channel.name }}</p>
       </md-list-item>

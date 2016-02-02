@@ -8,11 +8,12 @@
   function storeService(reduxService) {
     var store;
     var initialState = {
+      activeChannelFilter: 1,
       channels: [
-        {id: 1, name: 'channel 1', isActive: true},
-        {id: 2, name: 'channel 2', isActive: false},
-        {id: 3, name: 'channel 3', isActive: false},
-        {id: 4, name: 'channel 4', isActive: false}
+        {id: 1, name: 'channel 1'},
+        {id: 2, name: 'channel 2'},
+        {id: 3, name: 'channel 3'},
+        {id: 4, name: 'channel 4'}
       ],
       users: [
         {id: 1, name: 'Jiri Vopolka'},
