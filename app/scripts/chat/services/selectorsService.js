@@ -12,7 +12,7 @@
       messagesSelector: messagesSelector,
       usersSelector: usersSelector,
 
-      activeMessagesSelector: createActiveMessagesSelector()
+      activeMessagesSelector: activeMessagesSelectorFactory()
     };
 
     /////////////////////
@@ -37,7 +37,7 @@
     ////////////////////////
     // Combined selectors. /
     ////////////////////////
-    function createActiveMessagesSelector() {
+    function activeMessagesSelectorFactory() {
       return reselectService.createSelector(
         [
           messagesSelector,

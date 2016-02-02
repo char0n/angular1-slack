@@ -45,10 +45,10 @@
     // Events.
     $timeout(function() {
       storeService.dispatch({
-        type: 'channel.updated',
+        type: 'channel.setName',
         payload: {
-          channelId: 1,
-          delta: {name: 'channel 11'}
+          id: 1,
+          name: 'channel 11'
         }
       });
     }, 4000);

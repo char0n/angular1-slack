@@ -5,7 +5,7 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(reduxService) {
+  function storeService(reduxService, _) {
     var store;
     var initialState = {
       activeChannelFilter: 1,
@@ -26,28 +26,64 @@
       ]
     };
 
-    function reducers(state, action) {
-      var newState = angular.copy(state);
+    store = reduxService.createStore(combineReducersFactory(), initialState);
+    return store;
 
+    //////////////
+    // Reducers //
+    //////////////
+    function activeChannelFilter(state, action) {
       switch (action.type) {
-        case 'channel.updated': {
-          newState.channels
-            .filter(function(channel) {
-              return channel.id === action.payload.channelId;
-            })
-            .forEach(function(channel) {
-              return angular.extend(channel, action.payload.delta);
-            });
-          return newState;
+        case 'channel.setActive': {
+          return action.payload.activeChannelId;
         }
         default: {
-          return newState;
+          return (typeof state === 'undefined') ? 1 : state;
         }
       }
     }
 
-    store = reduxService.createStore(reducers, initialState);
+    function channels(state, action) {
+      var channel;
+      var index;
 
-    return store;
+      switch (action.type) {
+        case 'channel.setName': {
+          index = _.findIndex(state, {'id': action.payload.id});
+          channel = state[index];
+          channel = angular.extend({}, channel, {name: action.payload.name});
+          state.splice(index, 1, channel);
+          return state.slice();
+        }
+        default: {
+          return (typeof state === 'undefined') ? [] : state;
+        }
+      }
+    }
+
+    function users(state, action) {
+      switch (action.type) {
+        default: {
+          return (typeof state === 'undefined') ? [] : state;
+        }
+      }
+    }
+
+    function messages(state, action) {
+      switch (action.type) {
+        default: {
+          return (typeof state === 'undefined') ? [] : state;
+        }
+      }
+    }
+
+    function combineReducersFactory() {
+      return reduxService.combineReducers({
+        activeChannelFilter: activeChannelFilter,
+        channels: channels,
+        users: users,
+        messages: messages
+      });
+    }
   }
 })();
