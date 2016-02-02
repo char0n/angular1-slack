@@ -1,5 +1,5 @@
 {
   "preset": "google",
   "requireCurlyBraces": true,
-  "maximumLineLength": 90
+  "maximumLineLength": 100
 }
