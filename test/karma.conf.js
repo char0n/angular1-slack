@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/redux/index.js',
       'bower_components/lodash/index.js',
       'bower_components/reselect/index.js',
+      'bower_components/immutable/dist/immutable.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
