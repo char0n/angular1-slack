@@ -5,7 +5,7 @@
     .module('app.chat')
     .factory('selectorsService', selectorsService);
 
-  function selectorsService(reselectService, _) {
+  function selectorsService(reselectService) {
     return {
       channelsSelector: channelsSelector,
       activeChannelFilterSelector: activeChannelFilterSelector,
@@ -19,19 +19,19 @@
     // Input selectors. /
     /////////////////////
     function channelsSelector(state) {
-      return state.channels;
+      return state.get('channels');
     }
 
     function activeChannelFilterSelector(state) {
-      return state.activeChannelFilter;
+      return state.get('activeChannelFilter');
     }
 
     function messagesSelector(state) {
-      return state.messages;
+      return state.get('messages');
     }
 
     function usersSelector(state) {
-      return state.users;
+      return state.get('users');
     }
 
     ////////////////////////
@@ -45,20 +45,17 @@
           activeChannelFilterSelector
         ],
         function(messages, users, activeChannelFilter) {
-          var combinedMessages =
-            messages
-              .filter(function(message) {
-                return message.channelId === activeChannelFilter;
-              })
-              .map(function(message) {
-                return angular.extend({
-                  user: _.find(users, 'id', message.userId)
-                }, message);
-              })
+          return messages
+            .filter(function(message) {
+              return message.channelId === activeChannelFilter;
+            })
+            .map(function(message) {
+              var user = users.find(function(user) {
+                return message.get('userId') === user.get('id');
+              });
+              return message.set('user', user);
+            })
             ;
-          return {
-            messages: combinedMessages
-          };
         }
       );
     }

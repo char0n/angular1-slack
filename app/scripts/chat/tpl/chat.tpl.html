@@ -39,9 +39,10 @@
   <md-sidenav flex="none" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')"
               md-component-id="chat-left-menu">
     <md-content>
-      <md-list-item ng-repeat="channel in chat.channels" ng-class="::{'active': channel.id === chat.activeChannelFilter}"
-                    ng-click="chat.gotoChannel()">
-        <p>#{{ ::channel.name }}</p>
+      <md-list-item ng-repeat="channel in chat.channels"
+                    ng-class="::{'active': channel.get('id') === chat.activeChannelFilter}"
+                    ng-click="::chat.gotoChannel()">
+        <p>#{{ ::channel.get('name') }}</p>
       </md-list-item>
     </md-content>
   </md-sidenav>
@@ -179,15 +180,15 @@
           </div>
         </md-list-item>
       </md-list>
+
+      <md-sidenav class="md-sidenav-right md-whiteframe-z2 " md-component-id="conversion-menu">
+        <md-toolbar class="md-theme-light md-hue-1">
+          <h1 class="md-toolbar-tools">Conversation options</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+          options
+        </md-content>
+      </md-sidenav>
     </md-content>
   </div>
 </section>
-
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu">
-  <md-toolbar class="md-theme-light">
-    <h1 class="md-toolbar-tools">Conversation options</h1>
-  </md-toolbar>
-  <md-content layout-padding>
-    options
-  </md-content>
-</md-sidenav>

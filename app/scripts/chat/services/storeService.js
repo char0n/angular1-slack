@@ -5,9 +5,9 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(reduxService, _) {
+  function storeService(reduxService, immutableService) {
     var store;
-    var initialState = {
+    var initialState = immutableService.fromJS({
       activeChannelFilter: 1,
       channels: [
         {id: 1, name: 'channel 1'},
@@ -24,9 +24,9 @@
         {id: 1, channelId: 1, userId: 2, body: 'message body 2'},
         {id: 2, channelId: 1, userId: 1, body: 'message body 3'}
       ]
-    };
+    });
 
-    store = reduxService.createStore(combineReducersFactory(), initialState);
+    store = reduxService.createStore(combinedReducers, initialState);
     return store;
 
     //////////////
@@ -44,19 +44,17 @@
     }
 
     function channels(state, action) {
-      var channel;
-      var index;
-
       switch (action.type) {
         case 'channel.setName': {
-          index = _.findIndex(state, {'id': action.payload.id});
-          channel = state[index];
-          channel = angular.extend({}, channel, {name: action.payload.name});
-          state.splice(index, 1, channel);
-          return state.slice();
+          return state.update(
+            state.findIndex(function(channel) { return channel.get('id') === action.payload.id; }),
+            function(channel) {
+              return channel.set('name', action.payload.name);
+            }
+          );
         }
         default: {
-          return (typeof state === 'undefined') ? [] : state;
+          return (typeof state === 'undefined') ? immutableService.List() : state;
         }
       }
     }
@@ -64,7 +62,7 @@
     function users(state, action) {
       switch (action.type) {
         default: {
-          return (typeof state === 'undefined') ? [] : state;
+          return (typeof state === 'undefined') ? immutableService.List() : state;
         }
       }
     }
@@ -72,17 +70,17 @@
     function messages(state, action) {
       switch (action.type) {
         default: {
-          return (typeof state === 'undefined') ? [] : state;
+          return (typeof state === 'undefined') ? immutableService.List() : state;
         }
       }
     }
 
-    function combineReducersFactory() {
-      return reduxService.combineReducers({
-        activeChannelFilter: activeChannelFilter,
-        channels: channels,
-        users: users,
-        messages: messages
+    function combinedReducers(state, action) {
+      return immutableService.Map({
+        activeChannelFilter: activeChannelFilter(state.get('activeChannelFilter'), action),
+        channels: channels(state.get('channels'), action),
+        users: users(state.get('users'), action),
+        messages: messages(state.get('messages'), action)
       });
     }
   }

@@ -5,8 +5,7 @@
     .module('app.chat')
     .controller('ChatController', ChatController);
 
-  function ChatController($scope, $mdSidenav, $timeout, storeService,
-                          selectorsService) {
+  function ChatController($scope, $mdSidenav, $timeout, storeService, selectorsService) {
     var vm = this;
     var storeUnsubscribe ;
     vm.toggleLeftMenu = toggleLeftMenu;
@@ -15,7 +14,6 @@
 
     activate: {
       angular.extend(vm, select(storeService.getState()));
-
       storeUnsubscribe = storeService.subscribe(function() {
         angular.extend(vm, select(storeService.getState()));
       });
@@ -37,8 +35,8 @@
     function select(state) {
       return {
         activeChannelFilter: selectorsService.activeChannelFilterSelector(state),
-        channels: selectorsService.channelsSelector(state),
-        messages:  selectorsService.activeMessagesSelector(state)
+        channels: selectorsService.channelsSelector(state).toArray(),
+        messages:  selectorsService.activeMessagesSelector(state).toArray()
       };
     }
 
