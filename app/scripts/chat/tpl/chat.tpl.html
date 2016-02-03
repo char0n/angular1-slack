@@ -38,7 +38,10 @@
 <section layout="row" flex style="max-height: calc(100% - 64px)">
   <md-sidenav flex="none" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')"
               md-component-id="chat-left-menu">
-    <md-content>
+    <md-toolbar class="md-theme-light md-hue-1" hide-gt-md>
+      <h1 class="md-toolbar-tools">Channels</h1>
+    </md-toolbar>
+    <md-content md-scroll-y>
       <md-list-item ng-repeat="channel in chat.channels"
                     ng-class="::{'active': channel.get('id') === chat.activeChannelFilter}"
                     ng-click="::chat.gotoChannel()">
