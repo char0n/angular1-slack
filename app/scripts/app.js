@@ -1,6 +1,11 @@
 (function() {
   'use strict';
 
+  var upgradeAdapter = new ng.upgrade.UpgradeAdapter();
+  angular.element(document.body).ready(function() {
+    upgradeAdapter.bootstrap(document.body, ['app']);
+  });
+
   angular
     .module('app', [
       'ngAnimate',
@@ -13,6 +18,7 @@
 
       'app.chat'
     ])
+    .constant('upgradeAdapter', upgradeAdapter)
     .config(configureRoutes)
     .run(configureMoment);
 
