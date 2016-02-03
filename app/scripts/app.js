@@ -9,6 +9,7 @@
       'ngRoute',
       'ngSanitize',
       'ngMaterial',
+      'vendor',
 
       'app.chat'
     ])

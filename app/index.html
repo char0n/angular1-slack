@@ -46,18 +46,18 @@
     <script src="bower_components/lodash/index.js"></script>
     <script src="bower_components/reselect/index.js"></script>
     <script src="bower_components/immutable/dist/immutable.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/moment/locale/en-gb.js"></script>
+    <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/common/vendor.js"></script>
     <script src="scripts/chat/chat.js"></script>
-    <script src="scripts/chat/services/lodashService.js"></script>
-    <script src="scripts/chat/services/reduxService.js"></script>
     <script src="scripts/chat/services/storeService.js"></script>
-    <script src="scripts/chat/services/reselectService.js"></script>
     <script src="scripts/chat/services/selectorsService.js"></script>
-    <script src="scripts/chat/services/immutableService.js"></script>
     <script src="scripts/chat/controllers/ChatController.js"></script>
     <!-- endbuild -->
 </body>
