@@ -40,6 +40,48 @@
           userId: 1,
           body: 'message body 3',
           created: '2016-02-03T14:03:02.782Z'
+        },
+        {
+          id: 3,
+          channelId: 1,
+          userId: 1,
+          body: 'message body 1',
+          created: '2016-03-03T14:03:02.782Z'
+        },
+        {
+          id: 4,
+          channelId: 1,
+          userId: 2,
+          body: 'message body 2',
+          created: '2016-03-03T14:03:02.782Z'
+        },
+        {
+          id: 5,
+          channelId: 1,
+          userId: 1,
+          body: 'message body 3',
+          created: '2016-04-03T14:03:02.782Z'
+        },
+        {
+          id: 6,
+          channelId: 1,
+          userId: 1,
+          body: 'message body 1',
+          created: '2016-04-03T14:03:02.782Z'
+        },
+        {
+          id: 7,
+          channelId: 1,
+          userId: 2,
+          body: 'message body 2',
+          created: '2016-04-03T14:03:02.782Z'
+        },
+        {
+          id: 8,
+          channelId: 1,
+          userId: 1,
+          body: 'message body 3',
+          created: '2016-05-03T14:03:02.782Z'
         }
       ]
     });

@@ -13,7 +13,8 @@
 
       'app.chat'
     ])
-    .config(configureRoutes);
+    .config(configureRoutes)
+    .run(configureMoment);
 
   function configureRoutes($routeProvider) {
     $routeProvider
@@ -26,5 +27,9 @@
         redirectTo: '/'
       })
     ;
+  }
+
+  function configureMoment(moment) {
+    moment.locale('en-gb');
   }
 })();

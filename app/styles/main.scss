@@ -11,6 +11,14 @@ md-list-item.active .md-list-item-inner {
   font-weight: bold !important;
 }
 
+
+.tz-message .md-caption {
+  color: rgba(0, 0, 0, 0.54);
+}
+.tz-message .md-list-item-text p {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
 .tz-conversion-menu-opener {
   position: fixed;
   right: 15px;

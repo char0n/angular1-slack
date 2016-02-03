@@ -58,24 +58,31 @@
                    ng-click="chat.openConversationMenu()">
           <md-icon>menu</md-icon>
         </md-button>
-        <md-subheader class="md-no-sticky">2nd of January 2015</md-subheader>
-        <md-list-item class="md-3-line md-long-text" ng-repeat="message in chat.messages">
+        <md-divider ng-repeat-start="message in chat.messages" ng-if="::!$first && message.get('date')"></md-divider>
+        <md-subheader  ng-if="::message.has('date')">{{ ::message.get('date') }}</md-subheader>
+        <md-list-item class="md-3-line md-long-text tz-message" ng-repeat-end>
           <md-icon class="md-36">account_circle</md-icon>
           <div class="md-list-item-text">
-            <h3>{{ ::message.getIn(['user', 'name']) }}</h3>
+            <h4 class="md-subhead"><strong>{{ ::message.getIn(['user', 'name']) }}</strong> <time class="md-caption">{{ ::message.get('time') }}</time></h4>
             <p ng-bind-html="::message.get('body')"></p>
           </div>
         </md-list-item>
       </md-list>
-
-      <md-sidenav class="md-sidenav-right md-whiteframe-z2 " md-component-id="conversion-menu">
-        <md-toolbar class="md-theme-light md-hue-1">
-          <h1 class="md-toolbar-tools">Conversation options</h1>
-        </md-toolbar>
-        <md-content layout-padding>
-          options
-        </md-content>
-      </md-sidenav>
     </md-content>
   </div>
+
+  <md-sidenav flex="none" class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu"
+              md-is-locked-open="$mdMedia('gt-lg')">
+    <md-toolbar class="md-theme-light md-hue-1">
+      <h1 class="md-toolbar-tools">Conversation options</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+      board
+      <br /><br />
+      attachments
+      <br /><br />
+      pinned messages
+      <br /><br />
+    </md-content>
+  </md-sidenav>
 </section>
