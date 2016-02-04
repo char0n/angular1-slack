@@ -59,9 +59,7 @@
             .map(function(message, index) {
               return message.withMutations(function(message) {
                 var curMsgCreated = moment(message.get('created'));
-                var prevMsg = filteredMessages.has(index - 1) ?
-                  filteredMessages.get(index - 1) :
-                  null;
+                var prevMsg = index > 0 ? filteredMessages.get(index - 1) :  null;
                 var prevMsgCreated = prevMsg ? moment(prevMsg.get('created')) : moment(null);
 
                 message.set('time', curMsgCreated.format('LT A'));
