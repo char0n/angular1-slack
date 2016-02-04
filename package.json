@@ -45,6 +45,7 @@
     "browserify": "^13.0.0",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.13",
+    "redux-actions": "^0.9.1",
     "reflect-metadata": "^0.1.2",
     "reselect": "^2.0.2",
     "rxjs": "^5.0.0-beta.0",

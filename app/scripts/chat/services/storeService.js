@@ -37,7 +37,7 @@
     function activeChannelFilter(state, action) {
       switch (action.type) {
         case 'channel.switch': {
-          return action.payload.channelId;
+          return action.payload;
         }
         default: {
           return (typeof state === 'undefined') ? 1 : state;

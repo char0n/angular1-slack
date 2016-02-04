@@ -5,18 +5,9 @@
     .module('app.chat')
     .factory('actionsService', actionsService);
 
-  function actionsService() {
+  function actionsService(reduxActions) {
     return {
-      switchChannel: switchChannel
+      switchChannel: reduxActions.createAction('channel.switch')
     };
-
-    function switchChannel(channelId) {
-      return {
-        type: 'channel.switch',
-        payload: {
-          channelId: channelId
-        }
-      };
-    }
   }
 })();

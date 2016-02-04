@@ -10,8 +10,9 @@
     "angular-sanitize": "=1.4.9",
     "angular-material": "=1.0.3",
     "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.1.7/redux.js",
-    "lodash": "https://raw.githubusercontent.com/lodash/lodash/4.1.0/dist/lodash.js",
+    "redux-actions": "https://gist.githubusercontent.com/char0n/1cbf7055ec224f4c412e/raw/8c8ba93e3ebd7b51a3e9ee3c018037f41abd28bf/index.js",
     "reselect": "https://gist.githubusercontent.com/char0n/4630e0613b9b49673e42/raw/833883d6baca52a001929cd2fbd7b26da4f8722e/index.js",
+    "lodash": "https://raw.githubusercontent.com/lodash/lodash/4.1.0/dist/lodash.js",
     "immutable": "=3.7.6",
     "moment": "=2.11.1",
     "moment-timezone": "=0.5.0"
