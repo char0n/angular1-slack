@@ -5,8 +5,9 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(Redux, Immutable) {
+  function storeService(Redux, Immutable, _) {
     var store;
+    var messageIdCounter = 1;
     var initialState = Immutable.fromJS({
       activeChannelFilter: 1,
       channels: [
@@ -19,71 +20,11 @@
         {id: 1, name: 'Jiri Vopolka'},
         {id: 2, name: 'Vladimir Gorej'}
       ],
-      messages: [
-        {
-          id: 0,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 1',
-          created: '2016-02-03T14:03:02.782Z'
-        },
-        {
-          id: 1,
-          channelId: 1,
-          userId: 2,
-          body: 'message body 2',
-          created: '2016-02-03T14:03:02.782Z'
-        },
-        {
-          id: 2,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 3',
-          created: '2016-02-03T14:03:02.782Z'
-        },
-        {
-          id: 3,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 1',
-          created: '2016-03-03T14:03:02.782Z'
-        },
-        {
-          id: 4,
-          channelId: 1,
-          userId: 2,
-          body: 'message body 2',
-          created: '2016-03-03T14:03:02.782Z'
-        },
-        {
-          id: 5,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 3',
-          created: '2016-04-03T14:03:02.782Z'
-        },
-        {
-          id: 6,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 1',
-          created: '2016-04-03T14:03:02.782Z'
-        },
-        {
-          id: 7,
-          channelId: 1,
-          userId: 2,
-          body: 'message body 2',
-          created: '2016-04-03T14:03:02.782Z'
-        },
-        {
-          id: 8,
-          channelId: 1,
-          userId: 1,
-          body: 'message body 3',
-          created: '2016-05-03T14:03:02.782Z'
-        }
-      ]
+      messages: []
+        .concat(generateMessages(1, 20))
+        .concat(generateMessages(2, 30))
+        .concat(generateMessages(3, 40))
+        .concat(generateMessages(4, 50))
     });
 
     store = Redux.createStore(combinedReducers, initialState);
@@ -142,6 +83,34 @@
         users: users(state.get('users'), action),
         messages: messages(state.get('messages'), action)
       });
+    }
+
+    ////////////////
+    // Generators //
+    ////////////////
+    function generateMessages(channelId, size) {
+      var loremIpsum = 'Phasellus vulputate sapien mi. Praesent a risus elit.' +
+        ' Sed sodales ut tellus ec elementum. Donec hendrerit dui sit amet' +
+        ' velit pulvinar ornare. Maecenas eget pharetra est. Morbi quis vehicula' +
+        ' sapien. Curabitur eget vestibulum turpis. Cras posuere orci ut' +
+        ' dignissim blandit. Morbi fermentum orci eu sem eleifend, id maximus' +
+        ' turpis ultrices. Nam aliquam placerat leo id egestas. Donec ' +
+        'condimentum fermentum porta. In vulputate, leo sit amet vehicula' +
+        ' viverra, ex massa varius est, eu pellentesque lectus augue ac tortor.';
+      var userIds = [1, 2];
+      var i = 0;
+      var messages = [];
+
+      for (i; i < size; i++) {
+        messages.push({
+          id: messageIdCounter++,
+          channelId: channelId,
+          userId: _.sample(userIds),
+          body: loremIpsum.substr(10, _.random(10, loremIpsum.length, true)),
+          created: '2016-04-03T14:03:02.782Z'
+        });
+      }
+      return messages;
     }
   }
 })();
