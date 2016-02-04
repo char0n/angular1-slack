@@ -66,7 +66,7 @@
 
                 message.set('time', curMsgCreated.format('LT A'));
                 if (!prevMsgCreated.isValid() || !prevMsgCreated.isSame(curMsgCreated, 'day')) {
-                  message.set('date', curMsgCreated.format('MMMM D, YYYY'));
+                  message.set('date', curMsgCreated.format('MMMM Do, YYYY'));
                 }
               });
             })

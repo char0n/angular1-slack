@@ -60,7 +60,7 @@
         </md-button>
         <md-divider ng-repeat-start="message in chat.messages" ng-if="::!$first && message.get('date')"></md-divider>
         <md-subheader  ng-if="::message.has('date')">{{ ::message.get('date') }}</md-subheader>
-        <md-list-item class="md-3-line md-long-text tz-message" ng-repeat-end>
+        <md-list-item class="md-2-line md-long-text tz-message" ng-repeat-end>
           <md-icon class="md-36">account_circle</md-icon>
           <div class="md-list-item-text">
             <h4 class="md-subhead"><strong>{{ ::message.getIn(['user', 'name']) }}</strong> <time class="md-caption">{{ ::message.get('time') }}</time></h4>
