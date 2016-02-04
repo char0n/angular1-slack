@@ -5,12 +5,14 @@
     .module('app.chat')
     .controller('ChatController', ChatController);
 
-  function ChatController($scope, $mdSidenav, $timeout, storeService, selectorsService) {
+  function ChatController($scope, $mdSidenav, storeService, selectorsService,
+                          actionsService) {
     var vm = this;
     var storeUnsubscribe ;
     vm.toggleLeftMenu = toggleLeftMenu;
     vm.isOpenConversionMenu = isOpenConversionMenu;
     vm.openConversationMenu = openConversationMenu;
+    vm.switchChannel = switchChannel;
 
     activate: {
       angular.extend(vm, select(storeService.getState()));
@@ -32,6 +34,10 @@
       $mdSidenav('conversion-menu').open();
     }
 
+    function switchChannel(channelId) {
+      storeService.dispatch(actionsService.switchChannel(channelId));
+    }
+
     function select(state) {
       return {
         activeChannelFilter: selectorsService.activeChannelFilterSelector(state),
@@ -41,16 +47,6 @@
     }
 
     // Events.
-    $timeout(function() {
-      storeService.dispatch({
-        type: 'channel.setName',
-        payload: {
-          id: 1,
-          name: 'channel 11'
-        }
-      });
-    }, 4000);
-
     $scope.$on('$destroy', function() {
       storeUnsubscribe();
     });

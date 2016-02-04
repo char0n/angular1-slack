@@ -43,8 +43,8 @@
     </md-toolbar>
     <md-content flex md-scroll-y>
       <md-list-item ng-repeat="channel in chat.channels"
-                    ng-class="::{'active': channel.get('id') === chat.activeChannelFilter}"
-                    ng-click="::chat.gotoChannel()">
+                    ng-class="{'active': channel.get('id') === chat.activeChannelFilter}"
+                    ng-click="::chat.switchChannel(channel.get('id'))">
         <p>#{{ ::channel.get('name') }}</p>
       </md-list-item>
     </md-content>
@@ -59,11 +59,14 @@
           <md-icon>menu</md-icon>
         </md-button>
         <md-divider ng-repeat-start="message in chat.messages" ng-if="::!$first && message.get('date')"></md-divider>
-        <md-subheader  ng-if="::message.has('date')">{{ ::message.get('date') }}</md-subheader>
+        <md-subheader  ng-if="::message.has('date')"><time datetime="{{ ::message.get('created') }}">{{ ::message.get('date') }}</time></md-subheader>
         <md-list-item class="md-2-line md-long-text tz-message" ng-repeat-end>
           <md-icon class="md-36">account_circle</md-icon>
           <div class="md-list-item-text">
-            <h4 class="md-subhead"><strong>{{ ::message.getIn(['user', 'name']) }}</strong> <time class="md-caption">{{ ::message.get('time') }}</time></h4>
+            <h4 class="md-subhead">
+              <strong>{{ ::message.getIn(['user', 'name']) }}</strong>
+              <time datetime="{{ ::message.get('created') }}" class="md-caption">{{ ::message.get('time') }}</time>
+            </h4>
             <p ng-bind-html="::message.get('body')"></p>
           </div>
         </md-list-item>

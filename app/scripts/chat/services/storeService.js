@@ -5,9 +5,10 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(Redux, Immutable, _) {
+  function storeService(Redux, Immutable, moment, _) {
     var store;
     var messageIdCounter = 1;
+    var initialDate = moment();
     var initialState = Immutable.fromJS({
       activeChannelFilter: 1,
       channels: [
@@ -35,8 +36,8 @@
     //////////////
     function activeChannelFilter(state, action) {
       switch (action.type) {
-        case 'channel.setActive': {
-          return action.payload.activeChannelId;
+        case 'channel.switch': {
+          return action.payload.channelId;
         }
         default: {
           return (typeof state === 'undefined') ? 1 : state;
@@ -107,10 +108,17 @@
           channelId: channelId,
           userId: _.sample(userIds),
           body: loremIpsum.substr(10, _.random(10, loremIpsum.length, true)),
-          created: '2016-04-03T14:03:02.782Z'
+          created: initialDate.clone().add(_.random(1, 5), 'days').format()
         });
       }
-      return messages;
+      return messages.sort(function(a, b) {
+        var am = moment(a.created);
+        var bm = moment(b.created);
+
+        if (am.isSame(bm)) { return 0; }
+        if (am.isBefore(bm)) { return -1; }
+        if (am.isAfter(bm)) { return 1; }
+      });
     }
   }
 })();
