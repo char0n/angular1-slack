@@ -5,7 +5,7 @@
     .module('app.chat')
     .factory('selectorsService', selectorsService);
 
-  function selectorsService(reselect, moment) {
+  function selectorsService($q, reselect, moment) {
     return {
       channelsSelector: channelsSelector,
       activeChannelFilterSelector: activeChannelFilterSelector,
@@ -49,7 +49,7 @@
             return message.get('channelId') === activeChannelFilter;
           });
 
-          return filteredMessages
+          var combinedMessages = filteredMessages
             .map(function(message) {
               var user = users.find(function(user) {
                 return message.get('userId') === user.get('id');
@@ -69,6 +69,11 @@
               });
             })
             ;
+          return $q
+            .when(combinedMessages)
+            .then(function(combinedMessages) {
+              return combinedMessages.toArray(0);
+            });
         }
       );
     }

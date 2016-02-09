@@ -5,7 +5,7 @@
     .module('app.chat')
     .controller('ChatController', ChatController);
 
-  function ChatController($scope, $mdSidenav, storeService, selectorsService,
+  function ChatController($scope, $mdSidenav, $q, storeService, selectorsService,
                           actionsService) {
     var vm = this;
     var storeUnsubscribe ;
@@ -15,9 +15,15 @@
     vm.switchChannel = switchChannel;
 
     activate: {
-      angular.extend(vm, select(storeService.getState()));
+      select(storeService.getState())
+        .then(function(selectedState) {
+          angular.extend(vm, selectedState);
+        });
       storeUnsubscribe = storeService.subscribe(function() {
-        angular.extend(vm, select(storeService.getState()));
+        select(storeService.getState())
+          .then(function(selectedState) {
+            angular.extend(vm, selectedState);
+          });
       });
     }
 
@@ -39,11 +45,11 @@
     }
 
     function select(state) {
-      return {
+      return $q.all({
         activeChannelFilter: selectorsService.activeChannelFilterSelector(state),
         channels: selectorsService.channelsSelector(state).toArray(),
-        messages:  selectorsService.activeMessagesSelector(state).toArray()
-      };
+        messages:  selectorsService.activeMessagesSelector(state)
+      });
     }
 
     // Events.
