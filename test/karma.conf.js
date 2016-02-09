@@ -21,7 +21,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // bower:js
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
@@ -32,13 +31,14 @@ module.exports = function(config) {
       'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/redux/index.js',
-      'bower_components/lodash/index.js',
+      'bower_components/redux-actions/index.js',
       'bower_components/reselect/index.js',
+      'bower_components/lodash/index.js',
       'bower_components/immutable/dist/immutable.js',
       'bower_components/moment/moment.js',
       'bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      // endbower
+
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
