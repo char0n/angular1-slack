@@ -11,6 +11,7 @@
     var initialDate = moment();
     var initialState = Immutable.fromJS({
       activeChannelFilter: 1,
+      currentUserId: 1,
       channels: [
         {id: 1, name: 'channel 1'},
         {id: 2, name: 'channel 2'},
@@ -45,6 +46,14 @@
       }
     }
 
+    function currentUserId(state, action) {
+      switch (action.type) {
+        default: {
+          return (typeof state === 'undefined') ? 1 : state;
+        }
+      }
+    }
+
     function channels(state, action) {
       switch (action.type) {
         case 'channel.setName': {
@@ -71,6 +80,15 @@
 
     function messages(state, action) {
       switch (action.type) {
+        case 'messages.send': {
+          return state.push(Immutable.Map({
+            id: ++messageIdCounter,
+            userId: store.getState().get('currentUserId'),
+            channelId: store.getState().get('activeChannelFilter'),
+            body: action.payload,
+            created: moment().format()
+          }));
+        }
         default: {
           return (typeof state === 'undefined') ? Immutable.List() : state;
         }
@@ -80,6 +98,7 @@
     function combinedReducers(state, action) {
       return Immutable.Map({
         activeChannelFilter: activeChannelFilter(state.get('activeChannelFilter'), action),
+        currentUserId: currentUserId(state.get('currentUserId'), action),
         channels: channels(state.get('channels'), action),
         users: users(state.get('users'), action),
         messages: messages(state.get('messages'), action)

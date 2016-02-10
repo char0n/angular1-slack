@@ -7,7 +7,12 @@
 
   function actionsService(reduxActions) {
     return {
-      switchChannel: reduxActions.createAction('channel.switch')
+      channels: {
+        switch: reduxActions.createAction('channel.switch')
+      },
+      messages: {
+        send: reduxActions.createAction('messages.send')
+      }
     };
   }
 })();

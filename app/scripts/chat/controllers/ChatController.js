@@ -41,7 +41,7 @@
     }
 
     function switchChannel(channelId) {
-      storeService.dispatch(actionsService.switchChannel(channelId));
+      storeService.dispatch(actionsService.channels.switch(channelId));
     }
 
     function select(state) {
