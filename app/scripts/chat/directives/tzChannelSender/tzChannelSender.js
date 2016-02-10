@@ -22,8 +22,11 @@
         event.preventDefault();
 
         var textarea = angular.element(this);
-        controller.send(textarea.val());
-        textarea.val('');
+        var value = textarea.val();
+        if (value.trim() !== '') {
+          controller.send(textarea.val());
+          textarea.val('');
+        }
       });
     }
   }
