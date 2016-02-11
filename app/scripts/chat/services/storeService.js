@@ -30,7 +30,7 @@
       genMessages: []
     });
 
-    store = Redux.createStore(combinedReducers, initialState);
+    store = Redux.createStore(rootReducer, initialState);
     return store;
 
     //////////////
@@ -91,7 +91,7 @@
       }
     }
 
-    function combinedReducers(state, action) {
+    function rootReducer(state, action) {
       return Immutable.Map({
         activeChannelFilter: activeChannelFilter(
           selectorsService.activeChannelFilterSelector(state),
