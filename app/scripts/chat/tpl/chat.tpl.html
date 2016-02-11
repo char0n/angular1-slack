@@ -58,7 +58,7 @@
                    ng-click="chat.openConversationMenu()">
           <md-icon>more_vert</md-icon>
         </md-button>
-        <md-divider ng-repeat-start="message in chat.messages | limitTo:20"
+        <md-divider ng-repeat-start="message in chat.messages"
                     ng-if="::(!$first && chat.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
         <md-subheader  ng-if="::($first || chat.messages[$index - 1].get('date') !== message.get('date'))">
           <time datetime="{{ ::message.get('created') }}">{{ ::message.get('date') }}</time>

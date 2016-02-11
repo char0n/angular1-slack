@@ -24,9 +24,9 @@
       ],
       messages: []
         .concat(generateMessages(1, 20))
-        .concat(generateMessages(2, 30))
-        .concat(generateMessages(3, 40))
-        .concat(generateMessages(4, 50)),
+        .concat(generateMessages(2, 20))
+        .concat(generateMessages(3, 20))
+        .concat(generateMessages(4, 20)),
       genMessages: []
     });
 
