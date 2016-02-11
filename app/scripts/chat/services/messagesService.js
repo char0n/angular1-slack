@@ -7,7 +7,8 @@
 
   function messagesService(Immutable, moment, selectorsService) {
     return {
-      send: send
+      send: send,
+      setUserName: setUserName
     };
 
     function send(state, messagesState, payload) {
@@ -26,6 +27,24 @@
         date: dateTime.format('MMMM Do, YYYY'),
         time: dateTime.format('LT A')
       }));
+    }
+
+    function setUserName(state, messagesState, payload) {
+      var newState = messagesState;
+
+      messagesState
+        .filter(function(message) {
+          return message.get('userId') === payload.id;
+        })
+        .map(function(message) {
+          return messagesState.indexOf(message);
+        })
+        .forEach(function(index) {
+          newState = newState.update(index, function(message) {
+            return message.set('userName', payload.name);
+          });
+        });
+      return newState;
     }
   }
 })();

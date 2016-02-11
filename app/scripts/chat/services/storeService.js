@@ -6,7 +6,7 @@
     .factory('storeService', storeService);
 
   function storeService(Redux, selectorsService, Immutable, moment,
-                        messagesService, channelsService, _) {
+                        messagesService, channelsService, usersService, _) {
     var store;
     var initialDate = moment();
     var initialState = Immutable.fromJS({
@@ -68,6 +68,9 @@
 
     function users(state, action) {
       switch (action.type) {
+        case 'users.setName': {
+          return usersService.setName(store.getState(), state, action.payload);
+        }
         default: {
           return (typeof state === 'undefined') ? Immutable.List() : state;
         }
@@ -78,6 +81,9 @@
       switch (action.type) {
         case 'messages.send': {
           return messagesService.send(store.getState(), state, action.payload);
+        }
+        case 'users.setName': {
+          return messagesService.setUserName(store.getState(), state, action.payload);
         }
         default: {
           return (typeof state === 'undefined') ? Immutable.List() : state;
