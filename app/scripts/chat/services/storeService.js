@@ -5,9 +5,9 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(Redux, Immutable, moment, _) {
+  function storeService(Redux, selectorsService, Immutable, moment,
+                        messagesService, channelsService, _) {
     var store;
-    var messageIdCounter = 1;
     var initialDate = moment();
     var initialState = Immutable.fromJS({
       activeChannelFilter: 1,
@@ -26,7 +26,8 @@
         .concat(generateMessages(1, 20))
         .concat(generateMessages(2, 30))
         .concat(generateMessages(3, 40))
-        .concat(generateMessages(4, 50))
+        .concat(generateMessages(4, 50)),
+      genMessages: []
     });
 
     store = Redux.createStore(combinedReducers, initialState);
@@ -57,12 +58,7 @@
     function channels(state, action) {
       switch (action.type) {
         case 'channel.setName': {
-          return state.update(
-            state.findIndex(function(channel) { return channel.get('id') === action.payload.id; }),
-            function(channel) {
-              return channel.set('name', action.payload.name);
-            }
-          );
+          return channelsService.setName(store.getState(), state, action.payload);
         }
         default: {
           return (typeof state === 'undefined') ? Immutable.List() : state;
@@ -81,13 +77,7 @@
     function messages(state, action) {
       switch (action.type) {
         case 'messages.send': {
-          return state.push(Immutable.Map({
-            id: ++messageIdCounter,
-            userId: store.getState().get('currentUserId'),
-            channelId: store.getState().get('activeChannelFilter'),
-            body: action.payload,
-            created: moment().format()
-          }));
+          return messagesService.send(store.getState(), state, action.payload);
         }
         default: {
           return (typeof state === 'undefined') ? Immutable.List() : state;
@@ -97,11 +87,14 @@
 
     function combinedReducers(state, action) {
       return Immutable.Map({
-        activeChannelFilter: activeChannelFilter(state.get('activeChannelFilter'), action),
-        currentUserId: currentUserId(state.get('currentUserId'), action),
-        channels: channels(state.get('channels'), action),
-        users: users(state.get('users'), action),
-        messages: messages(state.get('messages'), action)
+        activeChannelFilter: activeChannelFilter(
+          selectorsService.activeChannelFilterSelector(state),
+          action
+        ),
+        currentUserId: currentUserId(selectorsService.currentUserIdSelector(state), action),
+        channels: channels(selectorsService.channelsSelector(state), action),
+        users: users(selectorsService.usersSelector(state), action),
+        messages: messages(selectorsService.messagesSelector(state), action)
       });
     }
 
@@ -117,17 +110,29 @@
         ' turpis ultrices. Nam aliquam placerat leo id egestas. Donec ' +
         'condimentum fermentum porta. In vulputate, leo sit amet vehicula' +
         ' viverra, ex massa varius est, eu pellentesque lectus augue ac tortor.';
-      var userIds = [1, 2];
+      var users = [
+        {id: 1, name: 'Jiri Vopolka'},
+        {id: 2, name: 'Vladimir Gorej'}
+      ];
+
       var i = 0;
+      var user;
+      var date;
       var messages = [];
 
       for (i; i < size; i++) {
+        user = _.sample(users);
+        date = initialDate.clone().add(_.random(1, 5), 'days');
+
         messages.push({
-          id: messageIdCounter++,
+          id: date.format('x'),
           channelId: channelId,
-          userId: _.sample(userIds),
+          userId: user.id,
+          userName: user.name,
           body: loremIpsum.substr(10, _.random(10, loremIpsum.length, true)),
-          created: initialDate.clone().add(_.random(1, 5), 'days').format()
+          created: date.format(),
+          date: date.format('MMMM Do, YYYY'),
+          time: date.format('LT A')
         });
       }
       return messages.sort(function(a, b) {

@@ -58,13 +58,16 @@
                    ng-click="chat.openConversationMenu()">
           <md-icon>menu</md-icon>
         </md-button>
-        <md-divider ng-repeat-start="message in chat.messages" ng-if="::!$first && message.get('date')"></md-divider>
-        <md-subheader  ng-if="::message.has('date')"><time datetime="{{ ::message.get('created') }}">{{ ::message.get('date') }}</time></md-subheader>
+        <md-divider ng-repeat-start="message in chat.messages"
+                    ng-if="::(!$first && chat.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
+        <md-subheader  ng-if="::($first || chat.messages[$index - 1].get('date') !== message.get('date'))">
+          <time datetime="{{ ::message.get('created') }}">{{ ::message.get('date') }}</time>
+        </md-subheader>
         <md-list-item class="md-2-line md-long-text tz-message" ng-repeat-end>
           <md-icon class="md-36">account_circle</md-icon>
           <div class="md-list-item-text">
             <h4 class="md-subhead">
-              <strong>{{ ::message.getIn(['user', 'name']) }}</strong>
+              <strong>{{ ::message.get('userName') }}</strong>
               <time datetime="{{ ::message.get('created') }}" class="md-caption">{{ ::message.get('time') }}</time>
             </h4>
             <p ng-bind-html="::message.get('body')"></p>

@@ -5,10 +5,11 @@
     .module('app.chat')
     .factory('selectorsService', selectorsService);
 
-  function selectorsService($q, reselect, moment) {
+  function selectorsService(reselect) {
     return {
-      channelsSelector: channelsSelector,
       activeChannelFilterSelector: activeChannelFilterSelector,
+      currentUserIdSelector: currentUserIdSelector,
+      channelsSelector: channelsSelector,
       messagesSelector: messagesSelector,
       usersSelector: usersSelector,
 
@@ -18,12 +19,16 @@
     /////////////////////
     // Input selectors. /
     /////////////////////
-    function channelsSelector(state) {
-      return state.get('channels');
-    }
-
     function activeChannelFilterSelector(state) {
       return state.get('activeChannelFilter');
+    }
+
+    function currentUserIdSelector(state) {
+      return state.get('currentUserId');
+    }
+
+    function channelsSelector(state) {
+      return state.get('channels');
     }
 
     function messagesSelector(state) {
@@ -41,39 +46,12 @@
       return reselect.createSelector(
         [
           messagesSelector,
-          usersSelector,
           activeChannelFilterSelector
         ],
-        function(messages, users, activeChannelFilter) {
-          var filteredMessages = messages.filter(function(message) {
+        function(messages, activeChannelFilter) {
+          return messages.filter(function(message) {
             return message.get('channelId') === activeChannelFilter;
           });
-
-          var combinedMessages = filteredMessages
-            .map(function(message) {
-              var user = users.find(function(user) {
-                return message.get('userId') === user.get('id');
-              });
-              return message.set('user', user);
-            })
-            .map(function(message, index) {
-              return message.withMutations(function(message) {
-                var curMsgCreated = moment(message.get('created'));
-                var prevMsg = index > 0 ? filteredMessages.get(index - 1) :  null;
-                var prevMsgCreated = prevMsg ? moment(prevMsg.get('created')) : moment(null);
-
-                message.set('time', curMsgCreated.format('LT A'));
-                if (!prevMsgCreated.isValid() || !prevMsgCreated.isSame(curMsgCreated, 'day')) {
-                  message.set('date', curMsgCreated.format('MMMM Do, YYYY'));
-                }
-              });
-            })
-            ;
-          return $q
-            .when(combinedMessages)
-            .then(function(combinedMessages) {
-              return combinedMessages.toArray(0);
-            });
         }
       );
     }
