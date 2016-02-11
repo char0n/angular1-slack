@@ -2,13 +2,13 @@
   "name": "app",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "=1.4.9",
-    "angular-animate": "=1.4.9",
-    "angular-cookies": "=1.4.9",
-    "angular-resource": "=1.4.9",
-    "angular-route": "=1.4.9",
-    "angular-sanitize": "=1.4.9",
-    "angular-material": "=1.0.3",
+    "angular": "=1.5.0",
+    "angular-animate": "=1.5.0",
+    "angular-cookies": "=1.5.0",
+    "angular-resource": "=1.5.0",
+    "angular-route": "=1.5.0",
+    "angular-sanitize": "=1.5.0",
+    "angular-material": "=1.0.5",
     "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.1.7/redux.js",
     "redux-actions": "https://gist.githubusercontent.com/char0n/1cbf7055ec224f4c412e/raw/8c8ba93e3ebd7b51a3e9ee3c018037f41abd28bf/index.js",
     "reselect": "https://gist.githubusercontent.com/char0n/4630e0613b9b49673e42/raw/833883d6baca52a001929cd2fbd7b26da4f8722e/index.js",
@@ -16,10 +16,10 @@
     "immutable": "=3.7.6",
     "moment": "=2.11.1",
     "moment-timezone": "=0.5.0",
-    "jquery": "~2.2.0"
+    "jquery": "=2.2.0"
   },
   "devDependencies": {
-    "angular-mocks": "=1.4.9"
+    "angular-mocks": "=1.5.0"
   },
   "appPath": "app",
   "moduleName": "app"
