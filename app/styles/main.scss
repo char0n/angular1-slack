@@ -17,6 +17,18 @@ md-list-item.active .md-list-item-inner {
   margin-top: 0 !important;
   margin-bottom: .5em !important;
 }
+.tz-message .tz-message-menu {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  visibility: hidden;
+}
+.tz-message:hover {
+  background-color: rgba(0,0,0,0.10);
+}
+.tz-message:hover .tz-message-menu {
+  visibility: visible;
+}
 .tz-message .md-caption {
   color: rgba(0, 0, 0, 0.54);
 }

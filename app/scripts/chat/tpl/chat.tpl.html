@@ -56,7 +56,7 @@
         <md-button class="md-icon-button tz-conversion-menu-opener"
                    ng-hide="chat.isOpenConversionMenu()"
                    ng-click="chat.openConversationMenu()">
-          <md-icon>menu</md-icon>
+          <md-icon>more_vert</md-icon>
         </md-button>
         <md-divider ng-repeat-start="message in chat.messages"
                     ng-if="::(!$first && chat.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
@@ -70,6 +70,21 @@
               <strong>{{ ::message.get('userName') }}</strong>
               <time datetime="{{ ::message.get('created') }}" class="md-caption">{{ ::message.get('time') }}</time>
             </h4>
+            <md-menu md-position-mode="target-right target" class="tz-message-menu">
+              <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <md-icon md-menu-origin>more_horiz</md-icon>
+              </md-button>
+              <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">
+                  <md-button ng-click="action()">
+                    <div layout="row">
+                      <p flex>Option {{item}}</p>
+                      <md-icon md-menu-align-target>menu_horiz</md-icon>
+                    </div>
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
             <p ng-bind-html="::message.get('body')"></p>
           </div>
         </md-list-item>
