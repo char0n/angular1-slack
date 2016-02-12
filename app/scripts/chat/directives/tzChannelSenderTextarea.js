@@ -8,6 +8,7 @@
   function tzChannelSenderTextarea() {
     return {
       restrict: 'A',
+      priority: 1,
       require: ['^tzChannelSender', 'tzChannelSenderTextarea'],
       link: tzChannelSenderTextareaLinker,
       controller: TzChannelSenderTextareaController,

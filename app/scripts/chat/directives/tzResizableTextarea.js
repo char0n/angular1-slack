@@ -8,6 +8,7 @@
   function tzResizableTextarea() {
     return {
       restrict: 'A',
+      priority: 0,
       link: tzResizableTextareaLinker
     };
 
@@ -20,13 +21,13 @@
       function resizeTextareaHandler(event) {
         if (!(event.which === 13 && event.shiftKey)) { return; }
 
-        element.css('min-height', parseFloat(element.css('min-height')) + initialHeight);
+        element.height(element.height() + initialHeight);
       }
 
-      function restoreOriginalSizeHandler() {
+      function restoreOriginalSizeHandler(event) {
         if (!(event.which === 13 && !event.shiftKey)) { return; }
 
-        element.css('min-height', initialHeight);
+        element.height(initialHeight);
       }
 
       scope.$on('$destroy', function() {
