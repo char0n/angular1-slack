@@ -44,7 +44,7 @@
       function shrinkTextareaHandler(event) {
         if (event.which !== 46 && event.which !== 8) { return; }
 
-        var newLinesCount = countNewLines(event.target.value);
+        var newLinesCount = countNewLines(angular.element(event.target).val());
         if (newLinesCount > 0) {
           element.height(newLinesCount * initialHeight);
         }
