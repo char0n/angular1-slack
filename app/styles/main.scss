@@ -34,10 +34,10 @@ tz-channel-sender textarea {
   top: -10px;
   visibility: hidden;
 }
-.tz-message:hover {
+.tz-message:hover, .tz-message.active {
   background-color: rgba(0,0,0,0.10);
 }
-.tz-message:hover tz-message-menu {
+.tz-message:hover tz-message-menu, .tz-message.active {
   visibility: visible;
 }
 .tz-message .md-caption {
