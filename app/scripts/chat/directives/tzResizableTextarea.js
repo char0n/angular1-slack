@@ -5,7 +5,7 @@
     .module('app.chat')
     .directive('tzResizableTextarea', tzResizableTextarea);
 
-  function tzResizableTextarea() {
+  function tzResizableTextarea(_) {
     return {
       restrict: 'A',
       priority: 0,
@@ -18,6 +18,8 @@
       element.on('keypress.tzResizableTextarea', growHandler);
       element.on('keypress.tzResizableTextarea', restoreHandler);
       element.on('keyup.tzResizableTextarea', shrinkHandler);
+      element.on('input.tzResizableTextarea change.tzResizableTextarea',
+        _.debounce(inputHandler, 200));
 
       ///////////
       // Utils //
@@ -48,6 +50,11 @@
         if (newLinesCount > 0) {
           element.height(newLinesCount * initialHeight);
         }
+      }
+
+      function inputHandler() {
+        var newLinesCount = countNewLines(element.val());
+        element.height(newLinesCount * initialHeight);
       }
 
       scope.$on('$destroy', function() {
