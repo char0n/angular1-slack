@@ -9,13 +9,11 @@
     return {
       restrict: 'E',
       templateUrl: 'scripts/chat/directives/tzChannelSender/tz-channel-sender.tpl.html',
-      link: tzChannelSenderLinker,
-      controller: function() {},
+      controller: TzChannelSenderController,
       controllerAs: 'tzChannelSender'
     };
+  }
 
-    function tzChannelSenderLinker(scope, element) {
-      element.css('height', '60px');
-    }
+  function TzChannelSenderController() {
   }
 })();
