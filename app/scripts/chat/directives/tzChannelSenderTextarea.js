@@ -16,10 +16,8 @@
 
     function tzChannelSenderTextareaLinker(scope, element, attributes, controllers) {
       var controller = controllers[1];
-      var initialHeight = parseFloat(element.css('height'));
 
       element.on('keypress.tzChannelSenderTextarea', sendMessageHandler);
-      element.on('keypress.tzChannelSenderTextarea', resizeSenderHandler);
 
       function sendMessageHandler(event) {
         if (event.which !== 13 || event.shiftKey) { return; }
@@ -29,15 +27,8 @@
         var value = element.val();
         if (value.trim() !== '') {
           controller.send(element.val());
-          element.css('min-height', initialHeight);
           element.val('');
         }
-      }
-
-      function resizeSenderHandler(event) {
-        if (!(event.which === 13 && event.shiftKey)) { return; }
-
-        element.css('min-height', parseFloat(element.css('min-height')) + initialHeight);
       }
 
       scope.$on('$destroy', function() {
