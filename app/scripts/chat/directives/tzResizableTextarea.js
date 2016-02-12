@@ -15,9 +15,9 @@
     function tzResizableTextareaLinker(scope, element) {
       var initialHeight = element.height();
 
-      element.on('keypress.tzResizableTextarea', resizeTextareaHandler);
-      element.on('keypress.tzResizableTextarea', restoreOriginalSizeHandler);
-      element.on('keyup.tzResizableTextarea', shrinkTextareaHandler);
+      element.on('keypress.tzResizableTextarea', growHandler);
+      element.on('keypress.tzResizableTextarea', restoreHandler);
+      element.on('keyup.tzResizableTextarea', shrinkHandler);
 
       ///////////
       // Utils //
@@ -29,19 +29,19 @@
       //////////////
       // Handlers //
       //////////////
-      function resizeTextareaHandler(event) {
+      function growHandler(event) {
         if (!(event.which === 13 && event.shiftKey)) { return; }
 
         element.height(element.height() + initialHeight);
       }
 
-      function restoreOriginalSizeHandler(event) {
+      function restoreHandler(event) {
         if (!(event.which === 13 && !event.shiftKey)) { return; }
 
         element.height(initialHeight);
       }
 
-      function shrinkTextareaHandler(event) {
+      function shrinkHandler(event) {
         if (event.which !== 46 && event.which !== 8) { return; }
 
         var newLinesCount = countNewLines(angular.element(event.target).val());
