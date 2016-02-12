@@ -7,11 +7,6 @@
 
 .md-float-right { float: right }
 
-md-list-item.active .md-list-item-inner {
-  font-weight: bold !important;
-}
-
-
 tz-channel-sender textarea {
   display: block;
   height: 28px;
@@ -26,27 +21,38 @@ tz-channel-sender textarea {
   margin-left: 1em !important;
   margin-top: 0 !important;
   margin-bottom: .5em !important;
-}
-.tz-message tz-message-menu {
-  position: absolute;
-  right: 0;
-  top: -10px;
-  visibility: hidden;
-}
-.tz-message:hover, .tz-message.active {
-  background-color: rgba(0,0,0,0.10);
-}
-.tz-message:hover tz-message-menu, .tz-message.active {
-  visibility: visible;
-}
-.tz-message .md-caption {
-  color: rgba(0, 0, 0, 0.54);
-}
-.tz-message .md-list-item-text p {
-  color: rgba(0, 0, 0, 0.8) !important;
+
+  &:hover, &.active {
+    background-color: rgba(0,0,0,0.10);
+
+    tz-message-menu {
+      visibility: visible;
+    }
+  }
+
+  tz-message-menu {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    visibility: hidden;
+  }
+
+  .md-caption {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .md-list-item-text p {
+    color: rgba(0, 0, 0, 0.8) !important;
+  }
 }
 
-.tz-conversion-menu-opener {
+.tz-chat-main-menu {
+  md-list-item.active .md-list-item-inner {
+    font-weight: bold !important;
+  }
+}
+
+.tz-conversation-options-opener {
   position: fixed;
   right: 15px;
   top: 70px;
