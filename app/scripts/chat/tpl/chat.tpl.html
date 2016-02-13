@@ -54,8 +54,8 @@
     <md-content flex md-scroll-y tz-message-list>
       <md-list>
         <md-button class="md-icon-button tz-conversation-options-opener"
-                   ng-hide="chat.isOpenConversionMenu()"
-                   ng-click="chat.openConversationMenu()">
+                   ng-hide="::chat.isOpenConversionMenu()"
+                   ng-click="::chat.openConversationMenu()">
           <md-icon>more_vert</md-icon>
         </md-button>
         <md-divider ng-repeat-start="message in chat.messages"
@@ -82,10 +82,11 @@
   <md-sidenav flex="none" class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu"
               md-is-locked-open="$mdMedia('gt-lg')">
     <md-toolbar class="md-theme-light md-hue-1">
-      <h1 class="md-toolbar-tools">Conversation options</h1>
+      <h1 class="md-toolbar-tools">About #{{ chat.activeChannelDetail.get('name') }}</h1>
     </md-toolbar>
     <md-content layout-padding>
-      board
+      <h3>Board</h3>
+      {{ chat.activeChannelDetail.get('board') }}
       <br /><br />
       attachments
       <br /><br />

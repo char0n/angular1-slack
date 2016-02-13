@@ -41,6 +41,7 @@
     function select(state) {
       return {
         activeChannelFilter: selectorsService.activeChannelFilterSelector(state),
+        activeChannelDetail: selectorsService.activeChannelDetailSelector(state),
         channels: selectorsService.channelsSelector(state).toArray(),
         messages:  selectorsService.activeMessagesSelector(state).toArray()
       };

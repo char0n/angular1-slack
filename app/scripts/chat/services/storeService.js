@@ -13,10 +13,10 @@
       activeChannelFilter: 1,
       currentUserId: 1,
       channels: [
-        {id: 1, name: 'channel 1'},
-        {id: 2, name: 'channel 2'},
-        {id: 3, name: 'channel 3'},
-        {id: 4, name: 'channel 4'}
+        {id: 1, name: 'channel 1', board: 'This is board for channe1', userIds: [1, 2]},
+        {id: 2, name: 'channel 2', board: 'This is board for channe2', userIds: [1]},
+        {id: 3, name: 'channel 3', board: 'This is board for channe3', userIds: [2]},
+        {id: 4, name: 'channel 4', board: 'This is board for channe4', userIds: []}
       ],
       users: [
         {id: 1, name: 'Jiri Vopolka'},
