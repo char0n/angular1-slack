@@ -56,7 +56,7 @@
         <md-button class="md-icon-button tz-conversation-options-opener"
                    ng-hide="::chat.isOpenConversionMenu()"
                    ng-click="::chat.openConversationMenu()">
-          <md-icon>more_vert</md-icon>
+          <md-icon>info_outline</md-icon>
         </md-button>
         <md-divider ng-repeat-start="message in chat.messages"
                     ng-if="::(!$first && chat.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
