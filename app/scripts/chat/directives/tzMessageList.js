@@ -18,6 +18,12 @@
       var activeChannelId = selectorsService.activeChannelFilterSelector(storeService.getState());
       var storeUnsubscribe = storeService.subscribe(storeSubscriber);
 
+      observer.observe(element.children('md-list').get(0), {childList: true});
+
+      element.on('scroll.tzMessageList', throttledOnScrollHandler);
+
+      $timeout(scrollToBottom); // Handle scrolling to bottom after refresh/app start.
+
       function scrollToBottom() {
         if (alreadyAtBottom) {
           element.scrollTop(element.prop('scrollHeight'));
@@ -39,15 +45,10 @@
         var channelId = selectorsService.activeChannelFilterSelector(storeService.getState());
         if (activeChannelId !== channelId) {
           alreadyAtBottom = true;
+          activeChannelId = channelId;
           scrollToBottom();
         }
       }
-
-      observer.observe(element.children('md-list').get(0), {childList: true});
-
-      element.on('scroll.tzMessageList', throttledOnScrollHandler);
-
-      $timeout(scrollToBottom); // Handle scrolling to bottom after refresh/app start.
 
       scope.$on('$destroy', function() {
         element.off('.tzMessageList');
