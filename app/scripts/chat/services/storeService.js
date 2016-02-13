@@ -5,7 +5,7 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(Redux, selectorsService, Immutable, moment,
+  function storeService(Redux, reduxThunk, selectorsService, Immutable, moment,
                         messagesService, channelsService, usersService, _) {
     var store;
     var initialDate = moment();
@@ -30,7 +30,11 @@
       genMessages: []
     });
 
-    store = Redux.createStore(rootReducer, initialState);
+    store = Redux.createStore(
+      rootReducer,
+      initialState,
+      Redux.applyMiddleware(reduxThunk)
+    );
     return store;
 
     //////////////

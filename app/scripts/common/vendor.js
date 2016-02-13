@@ -8,7 +8,9 @@
     .factory('reselect', _reselect)
     .factory('Immutable', immutable)
     .factory('moment', _moment)
-    .factory('reduxActions', _reduxActions);
+    .factory('reduxActions', _reduxActions)
+    .factory('reduxThunk', _reduxThunk)
+  ;
 
   function lodash($window) {
     return $window._;
@@ -32,5 +34,9 @@
 
   function _reduxActions($window) {
     return $window.reduxActions;
+  }
+
+  function _reduxThunk($window) {
+    return $window.reduxThunk;
   }
 })();
