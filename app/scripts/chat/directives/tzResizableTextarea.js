@@ -46,7 +46,7 @@
       function shrinkHandler(event) {
         if (event.which !== 46 && event.which !== 8) { return; }
 
-        var newLinesCount = countNewLines(angular.element(event.target).val());
+        var newLinesCount = countNewLines(element.val());
         if (newLinesCount > 0) {
           element.height(newLinesCount * initialHeight);
         }
