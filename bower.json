@@ -11,6 +11,7 @@
     "angular-material": "=1.0.5",
     "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.1.7/redux.js",
     "redux-actions": "https://gist.githubusercontent.com/char0n/1cbf7055ec224f4c412e/raw/8c8ba93e3ebd7b51a3e9ee3c018037f41abd28bf/index.js",
+    "redux-thunk": "https://gist.githubusercontent.com/char0n/534f98ebdf9168fffb54/raw/cd42a2950534083e768f4e743ad3be815eac667b/index.js",
     "reselect": "https://gist.githubusercontent.com/char0n/4630e0613b9b49673e42/raw/833883d6baca52a001929cd2fbd7b26da4f8722e/index.js",
     "lodash": "https://raw.githubusercontent.com/lodash/lodash/4.1.0/dist/lodash.js",
     "immutable": "=3.7.6",
