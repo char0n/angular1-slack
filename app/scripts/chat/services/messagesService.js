@@ -8,6 +8,8 @@
   function messagesService(Immutable, moment, selectorsService) {
     return {
       send: send,
+      markAsSent: markAsSent,
+      markAsFailed: markAsFailed,
       setUserName: setUserName
     };
 
@@ -23,7 +25,10 @@
         userId: currentUserId,
         userName: currentUser.get('name'),
         channelId: activeChannelFilter,
-        body: payload,
+        body: payload.body,
+        sent: false,
+        ident: payload.ident,
+        failed: false,
         date: dateTime.format('MMMM Do, YYYY'),
         time: dateTime.format('LT A')
       }));
@@ -45,6 +50,34 @@
           });
         });
       return newState;
+    }
+
+    function markAsSent(state, messagesState, payload) {
+      var messageIndex = messagesState.findIndex(function(message) {
+        return message.get('ident') === payload;
+      });
+      return messagesState.update(
+        messageIndex,
+        function(message) {
+          return message.withMutations(function(message) {
+            message.set('sent', true).delete('ident');
+          });
+        }
+      );
+    }
+
+    function markAsFailed(state, messagesState, payload) {
+      var messageIndex = messagesState.findIndex(function(message) {
+        return message.get('ident') === payload;
+      });
+      return messagesState.update(
+        messageIndex,
+        function(message) {
+          return message.withMutations(function(message) {
+            message.set('sent', false).set('failed', true);
+          });
+        }
+      );
     }
   }
 })();

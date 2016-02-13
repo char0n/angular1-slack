@@ -38,12 +38,12 @@
     }
   }
 
-  function TzChannelSenderTextareaController(storeService, actionsService) {
+  function TzChannelSenderTextareaController(storeService, apiActionsService) {
     var vm = this;
     vm.send = send;
 
     function send(string) {
-      storeService.dispatch(actionsService.messages.send(string));
+      storeService.dispatch(apiActionsService.messages.send(string));
     }
   }
 })();

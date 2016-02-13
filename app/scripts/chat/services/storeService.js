@@ -90,6 +90,12 @@
         case 'messages.send': {
           return messagesService.send(store.getState(), state, action.payload);
         }
+        case 'messages.markAsSent': {
+          return messagesService.markAsSent(store.getState(), state, action.payload);
+        }
+        case 'messages.markAsFailed': {
+          return messagesService.markAsFailed(store.getState(), state, action.payload);
+        }
         case 'users.setName': {
           return messagesService.setUserName(store.getState(), state, action.payload);
         }
