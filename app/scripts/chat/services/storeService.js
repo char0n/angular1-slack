@@ -6,7 +6,8 @@
     .factory('storeService', storeService);
 
   function storeService(Redux, reduxThunk, selectorsService, Immutable, moment,
-                        messagesService, channelsService, usersService, _) {
+                        messagesService, channelsService, reduxMiddlewareService,
+                        usersService, _) {
     var store;
     var initialDate = moment();
     var initialState = Immutable.fromJS({
@@ -33,7 +34,10 @@
     store = Redux.createStore(
       rootReducer,
       initialState,
-      Redux.applyMiddleware(reduxThunk)
+      Redux.applyMiddleware(
+        reduxThunk,
+        reduxMiddlewareService.logging
+      )
     );
     return store;
 
