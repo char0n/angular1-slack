@@ -21,16 +21,16 @@
       var dateTime = moment();
 
       return messagesState.push(Immutable.Map({
-        id: dateTime.format('x'),
+        id: payload.created.format('x'),
         userId: currentUserId,
         userName: currentUser.get('name'),
         channelId: activeChannelFilter,
         body: payload.body,
-        sent: false,
         ident: payload.ident,
-        failed: false,
-        date: dateTime.format('MMMM Do, YYYY'),
-        time: dateTime.format('LT A')
+        sent: payload.sent,
+        failed: payload.failed,
+        date: payload.created.format('MMMM Do, YYYY'),
+        time: payload.created.format('LT A')
       }));
     }
 

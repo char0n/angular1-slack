@@ -5,12 +5,14 @@
     .module('app.chat')
     .factory('actionsService', actionsService);
 
-  function actionsService(reduxActions) {
+  function actionsService(reduxActions, moment) {
     var messagesSend = reduxActions.createAction('messages.send', function(body) {
       return {
         body: body,
+        ident: Math.random(),
         sent: false,
-        ident: Math.random()
+        failed: false,
+        created: moment()
       };
     });
 
