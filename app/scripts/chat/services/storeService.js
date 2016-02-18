@@ -5,9 +5,8 @@
     .module('app.chat')
     .factory('storeService', storeService);
 
-  function storeService(Redux, reduxThunk, selectorsService, Immutable, moment,
-                        messagesService, channelsService, reduxMiddlewareService,
-                        usersService, _) {
+  function storeService(Redux, reduxThunk, Immutable, moment, reduxMiddlewareService,
+                        reducersService, _) {
     var store;
     var initialDate = moment();
     var initialState = Immutable.fromJS({
@@ -32,7 +31,7 @@
     });
 
     store = Redux.createStore(
-      rootReducer,
+      reducersService.rootReducer,
       initialState,
       Redux.applyMiddleware(
         reduxThunk,
@@ -40,83 +39,6 @@
       )
     );
     return store;
-
-    //////////////
-    // Reducers //
-    //////////////
-    function activeChannelFilter(state, action) {
-      switch (action.type) {
-        case 'channel.switch': {
-          return action.payload;
-        }
-        default: {
-          return (typeof state === 'undefined') ? 1 : state;
-        }
-      }
-    }
-
-    function currentUserId(state, action) {
-      switch (action.type) {
-        default: {
-          return (typeof state === 'undefined') ? 1 : state;
-        }
-      }
-    }
-
-    function channels(state, action) {
-      switch (action.type) {
-        case 'channel.setName': {
-          return channelsService.setName(store.getState(), state, action.payload);
-        }
-        default: {
-          return (typeof state === 'undefined') ? Immutable.List() : state;
-        }
-      }
-    }
-
-    function users(state, action) {
-      switch (action.type) {
-        case 'users.setName': {
-          return usersService.setName(store.getState(), state, action.payload);
-        }
-        default: {
-          return (typeof state === 'undefined') ? Immutable.List() : state;
-        }
-      }
-    }
-
-    function messages(state, action) {
-      switch (action.type) {
-        case 'messages.send': {
-          return messagesService.send(store.getState(), state, action.payload);
-        }
-        case 'messages.markAsSent': {
-          return messagesService.markAsSent(store.getState(), state, action.payload);
-        }
-        case 'messages.markAsFailed': {
-          return messagesService.markAsFailed(store.getState(), state, action.payload);
-        }
-        case 'users.setName': {
-          return messagesService.setUserName(store.getState(), state, action.payload);
-        }
-        default: {
-          return (typeof state === 'undefined') ? Immutable.List() : state;
-        }
-      }
-    }
-
-    function rootReducer(state, action) {
-      return Immutable.Map({
-        activeChannelFilter: activeChannelFilter(
-          selectorsService.activeChannelFilterSelector(state),
-          action
-        ),
-        currentUserId: currentUserId(selectorsService.currentUserIdSelector(state), action),
-        channels: channels(selectorsService.channelsSelector(state), action),
-        users: users(selectorsService.usersSelector(state), action),
-        messages: messages(selectorsService.messagesSelector(state), action)
-      });
-    }
 
     ////////////////
     // Generators //

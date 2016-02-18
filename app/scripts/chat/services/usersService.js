@@ -10,15 +10,15 @@
       setName: setName
     };
 
-    function setName(state, usersState, payload) {
+    function setName(state, usersState, action) {
       var index = usersState.findIndex(function(user) {
-        return user.get('id') === payload.id; }
+        return user.get('id') === action.payload.id; }
       );
 
       return usersState.update(
         index,
         function(user) {
-          return user.set('name', payload.name);
+          return user.set('name', action.payload.name);
         }
       );
 
