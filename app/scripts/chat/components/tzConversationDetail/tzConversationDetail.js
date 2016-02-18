@@ -3,10 +3,19 @@
 
   angular
     .module('app.chat')
-    .controller('ChatController', ChatController);
+    .component('conversationDetail', conversationDetailFactory());
 
-  function ChatController($scope, $mdSidenav, storeService, selectorsService,
-                          actionsService) {
+  function conversationDetailFactory() {
+    return {
+      replace: true,
+      templateUrl: 'scripts/chat/components/tzConversationDetail/tz-conversation-detail.tpl.html',
+      controller: ConversationDetailController,
+      controllerAs: 'conversationDetail'
+    };
+  }
+
+  function ConversationDetailController($scope, $mdSidenav, storeService, selectorsService,
+                                        actionsService) {
     var vm = this;
     var storeUnsubscribe ;
     vm.toggleLeftMenu = toggleLeftMenu;

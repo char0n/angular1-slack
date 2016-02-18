@@ -24,13 +24,11 @@
 
   function configureRoutes($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'scripts/chat/tpl/chat.tpl.html',
-        controller: 'ChatController',
-        controllerAs: 'chat'
+      .when('/conversation', {
+        template: '<conversation-detail flex layout="column" layout-fill />'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/conversation'
       })
     ;
   }

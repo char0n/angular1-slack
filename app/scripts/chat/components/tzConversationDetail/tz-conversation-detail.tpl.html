@@ -1,6 +1,6 @@
 <md-toolbar flex="none">
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="chat.toggleLeftMenu()">
+    <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="conversationDetail.toggleLeftMenu()">
       <md-icon md-svg-icon="images/menu.svg"></md-icon>
     </md-button>
     <h2>
@@ -35,16 +35,16 @@
   </div>
 </md-toolbar>
 
-<section layout="row" flex style="max-height: calc(100% - 64px)">
+<section layout="row" flex>
   <md-sidenav flex="none" class="md-sidenav-left md-whiteframe-z2 tz-chat-main-menu" md-is-locked-open="$mdMedia('gt-md')"
               md-component-id="chat-left-menu">
     <md-toolbar class="md-theme-light md-hue-1" hide-gt-md>
       <h1 class="md-toolbar-tools">Channels</h1>
     </md-toolbar>
     <md-content flex md-scroll-y>
-      <md-list-item ng-repeat="channel in chat.channels"
-                    ng-class="{'active': channel.get('id') === chat.activeChannelFilter}"
-                    ng-click="::chat.switchChannel(channel.get('id'))">
+      <md-list-item ng-repeat="channel in conversationDetail.channels"
+                    ng-class="{'active': channel.get('id') === conversationDetail.activeChannelFilter}"
+                    ng-click="::conversationDetail.switchChannel(channel.get('id'))">
         <p>#{{ ::channel.get('name') }}</p>
       </md-list-item>
     </md-content>
@@ -54,13 +54,13 @@
     <md-content flex md-scroll-y tz-message-list>
       <md-list>
         <md-button class="md-icon-button tz-conversation-options-opener"
-                   ng-hide="::chat.isOpenConversionMenu()"
-                   ng-click="::chat.openConversationMenu()">
+                   ng-hide="::conversationDetail.isOpenConversionMenu()"
+                   ng-click="::conversationDetail.openConversationMenu()">
           <md-icon>info_outline</md-icon>
         </md-button>
-        <md-divider ng-repeat-start="message in chat.messages"
-                    ng-if="::(!$first && chat.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
-        <md-subheader  ng-if="::($first || chat.messages[$index - 1].get('date') !== message.get('date'))">
+        <md-divider ng-repeat-start="message in conversationDetail.messages"
+                    ng-if="::(!$first && conversationDetail.messages[$index - 1].get('date') !== message.get('date'))"></md-divider>
+        <md-subheader  ng-if="::($first || conversationDetail.messages[$index - 1].get('date') !== message.get('date'))">
           <time datetime="{{ ::message.get('created') }}">{{ ::message.get('date') }}</time>
         </md-subheader>
         <md-list-item class="md-2-line md-long-text tz-message" ng-repeat-end>
@@ -82,11 +82,11 @@
   <md-sidenav flex="none" class="md-sidenav-right md-whiteframe-z2" md-component-id="conversion-menu"
               md-is-locked-open="$mdMedia('gt-lg')">
     <md-toolbar class="md-theme-light md-hue-1">
-      <h1 class="md-toolbar-tools">About #{{ chat.activeChannelDetail.get('name') }}</h1>
+      <h1 class="md-toolbar-tools">About #{{ conversationDetail.activeChannelDetail.get('name') }}</h1>
     </md-toolbar>
     <md-content layout-padding>
       <h3>Board</h3>
-      {{ chat.activeChannelDetail.get('board') }}
+      {{ conversationDetail.activeChannelDetail.get('board') }}
       <br /><br />
       attachments
       <br /><br />
