@@ -5,7 +5,7 @@
     .module('app.chat')
     .factory('messagesService', messagesService);
 
-  function messagesService(Immutable, moment, selectorsService) {
+  function messagesService(Immutable, selectorsService) {
     return {
       send: send,
       markAsSent: markAsSent,
