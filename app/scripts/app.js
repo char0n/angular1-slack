@@ -16,7 +16,9 @@
       'ngMaterial',
       'vendor',
 
-      'app.chat'
+      'app.chat',
+      'app.people',
+      'app.calendar'
     ])
     .constant('upgradeAdapter', upgradeAdapter)
     .config(configureRoutes)
@@ -25,7 +27,13 @@
   function configureRoutes($routeProvider) {
     $routeProvider
       .when('/conversation', {
-        template: '<conversation-detail flex layout="column" layout-fill />'
+        template: '<tz-conversation-detail flex layout="column" layout-fill />'
+      })
+      .when('/calendar', {
+        template: '<tz-calendar />'
+      })
+      .when('/people', {
+        template: '<tz-people />'
       })
       .otherwise({
         redirectTo: '/conversation'

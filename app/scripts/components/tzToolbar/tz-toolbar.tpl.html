@@ -1,0 +1,36 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="tzConversationDetail.toggleLeftMenu()">
+      <md-icon md-svg-icon="images/menu.svg"></md-icon>
+    </md-button>
+    <h2>
+      <span>Team Zeus</span>
+    </h2>
+    <span flex></span>
+    <md-menu>
+      <md-button aria-label="Open main menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+        <md-icon>view_module</md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="tzToolbar.gotoChat()">
+            <md-icon>chat</md-icon>
+            Chat
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="tzToolbar.gotoCalendar()">
+            <md-icon>event</md-icon>
+            Calendar
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="tzToolbar.gotoPeople()">
+            <md-icon>contacts</md-icon>
+            People
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
