@@ -14,21 +14,21 @@
 
     function messagesSend(body) {
       return function(dispatch) {
-        var message = dispatch(actionsService.messages.send(body)).payload;
+        var action = dispatch(actionsService.messages.send(body));
 
         // Simulated API request.
         $q
           .when({ok: true})
           .then(function() {
             // Mark message as sent.
-            dispatch(actionsService.messages.markAsSent(message.ident));
+            dispatch(actionsService.messages.markAsSent(action.payload.ident));
           })
           .catch(function() {
             // Mark message as failed.
-            dispatch(actionsService.messages.markAsFailed(message.ident));
+            dispatch(actionsService.messages.markAsFailed(action.payload.ident));
           });
 
-        return message;
+        return action;
       };
     }
   }
