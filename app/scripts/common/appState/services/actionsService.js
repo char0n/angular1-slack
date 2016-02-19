@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('actionsService', actionsService);
 
   function actionsService(reduxActions, moment) {

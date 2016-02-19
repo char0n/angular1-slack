@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('components')
     .component('tzToolbar', tzToolbarFactory());
 
   function tzToolbarFactory() {
     return {
-      templateUrl: 'scripts/components/tzToolbar/tz-toolbar.tpl.html',
+      templateUrl: 'scripts/common/components/tzToolbar/tz-toolbar.tpl.html',
       controller: TzToolbarController,
       controllerAs: 'tzToolbar',
       bindings: {

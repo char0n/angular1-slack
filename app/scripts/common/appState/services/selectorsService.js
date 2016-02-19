@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('selectorsService', selectorsService);
 
   function selectorsService(reselect) {

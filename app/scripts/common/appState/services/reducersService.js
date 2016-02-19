@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('reducersService', reducersService);
 
   function reducersService(Immutable, selectorsService, messagesService,

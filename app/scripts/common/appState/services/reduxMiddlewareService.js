@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('reduxMiddlewareService', reduxMiddlewareService);
 
   function reduxMiddlewareService() {

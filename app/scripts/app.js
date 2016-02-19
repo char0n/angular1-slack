@@ -14,7 +14,10 @@
       'ngRoute',
       'ngSanitize',
       'ngMaterial',
+
       'vendor',
+      'appState',
+      'components',
 
       'app.chat',
       'app.people',

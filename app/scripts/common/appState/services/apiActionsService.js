@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('apiActionsService', apiActionsService);
 
   function apiActionsService($q, actionsService) {

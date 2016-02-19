@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.chat')
+    .module('appState')
     .factory('storeService', storeService);
 
   function storeService(Redux, reduxThunk, Immutable, moment, reduxMiddlewareService,
