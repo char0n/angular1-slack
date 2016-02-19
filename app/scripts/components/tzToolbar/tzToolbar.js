@@ -9,13 +9,15 @@
     return {
       templateUrl: 'scripts/components/tzToolbar/tz-toolbar.tpl.html',
       controller: TzToolbarController,
-      controllerAs: 'tzToolbar'
+      controllerAs: 'tzToolbar',
+      bindings: {
+        onMenuClick: '&?'
+      }
     };
   }
 
-  function TzToolbarController($scope, $location) {
+  function TzToolbarController($location) {
     var vm = this;
-    vm.currentLocation = $location.path();
     vm.gotoChat = gotoChat;
     vm.gotoPeople = gotoPeople;
     vm.gotoCalendar = gotoCalendar;
@@ -35,9 +37,5 @@
     function goto(path) {
       $location.path(path);
     }
-
-    $scope.$on('$locationChangeSuccess', function() {
-      vm.currentLocation = $location.path();
-    });
   }
 })();

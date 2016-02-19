@@ -30,10 +30,6 @@
     }
 
     // Implementations.
-    function toggleLeftMenu() {
-      $mdSidenav('chat-left-menu').toggle();
-    }
-
     function isOpenConversionMenu() {
       return $mdSidenav('conversion-menu').isOpen();
     }
@@ -44,6 +40,10 @@
 
     function switchChannel(channelId) {
       storeService.dispatch(actionsService.channels.switch(channelId));
+    }
+
+    function toggleLeftMenu() {
+      $mdSidenav('chat-left-menu').toggle();
     }
 
     function select(state) {
