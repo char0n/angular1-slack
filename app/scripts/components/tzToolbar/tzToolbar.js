@@ -21,6 +21,7 @@
     vm.gotoChat = gotoChat;
     vm.gotoPeople = gotoPeople;
     vm.gotoCalendar = gotoCalendar;
+    vm.gotoTodo = gotoTodo;
 
     function gotoChat() {
       goto('/conversation');
@@ -32,6 +33,10 @@
 
     function gotoCalendar() {
       goto('/calendar');
+    }
+
+    function gotoTodo() {
+      goto('/todo');
     }
 
     function goto(path) {

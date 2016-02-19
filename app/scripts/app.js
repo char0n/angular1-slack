@@ -18,7 +18,8 @@
 
       'app.chat',
       'app.people',
-      'app.calendar'
+      'app.calendar',
+      'app.todo'
     ])
     .constant('upgradeAdapter', upgradeAdapter)
     .config(configureRoutes)
@@ -34,6 +35,9 @@
       })
       .when('/people', {
         template: '<tz-people />'
+      })
+      .when('/todo', {
+        template: '<tz-todo />'
       })
       .otherwise({
         redirectTo: '/conversation'
